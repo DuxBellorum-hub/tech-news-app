@@ -1,0 +1,45 @@
+<ion-header >
+  <ion-toolbar color ="tertiary">
+    <ion-buttons slot="start" (click)="goBack()" class="ion-activatable ripple-parent">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-icon style="font-size: 2rem;" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title style="font-family: 'Kaushan script', cursive; text-align: center;">
+      ARTICLES EN FAVORIS
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content color ="light">
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="100" (ionRefresh)="refresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles"></ion-refresher-content>
+  </ion-refresher>
+  <ion-card  *ngFor="let feed of feedsWithNoImgInSummary index as i " (click)="readArticle(i)"
+    class="ion-activatable ripple-parent">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-header style="padding: 5px;">
+      <ion-card-title style="font-family: 'Roboto', sans-serif;"> {{feed.title}} </ion-card-title>
+      <ion-card-subtitle> {{feed.date | date: "dd/MM/yyyy"}} par {{feed.author}} </ion-card-subtitle>
+    </ion-header>
+    <ion-card-content>
+      <p style="font-family: 'Roboto', sans-serif; color:black;" [innerHTML]="feed.summary | ellipsis:200 | noSanitize"></p>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="isEmptyFeed">
+    <p style="font-family: 'Roboto', sans-serif; text-align: center; text-transform: uppercase; margin-top: 20px; ">
+      Aucun article favoris...</p>
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-fab vertical="bottom" horizontal="end" (click)="deleteArticle()" title="Supprimer les favoris">
+    <ion-fab-button color="danger" style=" margin: 8px; width: 40px; height: 40px; line-height: 40px;">
+      <ion-icon name="trash-sharp"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-footer>
+

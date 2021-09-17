@@ -1,0 +1,8 @@
+{
+  "name": "gazette-techno",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

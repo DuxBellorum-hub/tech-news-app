@@ -1,0 +1,27 @@
+<ion-header [translucent]="true" >
+  <ion-toolbar color="tertiary">
+      <ion-title style="text-align: center; font-family: 'Kaushan Script', cursive;" size="large">
+        La Gazette de la Tech
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+
+      <ion-list *ngIf="newspapers" color="light">
+        <ion-item *ngFor="let news of newspapers" (click)="goToPage(news.id)" class="ion-activatable ripple-parent">
+          <ion-ripple-effect></ion-ripple-effect>
+          <ion-avatar slot="start">
+            <img style="width: 40px; height:40px;" src="{{news.logo}}">
+          </ion-avatar>
+          <ion-label style="font-family: 'Roboto', sans-serif;">{{news.name | uppercase}}</ion-label>
+        </ion-item>
+
+      </ion-list>
+      
+      <h1 *ngIf="!newspapers"  style="text-align: center; margin-top: 30vh;">
+        <app-loader></app-loader>
+      </h1>
+
+</ion-content>
+
